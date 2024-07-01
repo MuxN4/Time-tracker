@@ -1,0 +1,17 @@
+# Python
+*.pyc
+__pycache__/
+
+# Flask
+instance/
+*.pyc
+
+# Environment
+venv/
+.env
+
+# Node
+node_modules/
+
+# Other
+.DS_Store
