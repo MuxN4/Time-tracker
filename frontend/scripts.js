@@ -2,10 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskForm = document.getElementById('task-form');
     const tasksList = document.getElementById('tasks');
 
+    // Event listener for form submission
     taskForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const description = document.getElementById('description').value;
 
+        // Send POST request to create a new task
         const response = await fetch('/tasks', {
             method: 'POST',
             headers: {
@@ -18,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         addTaskToList(task);
     });
 
+    // Function to add a task to the task list
     function addTaskToList(task) {
         const li = document.createElement('li');
         li.innerHTML = `
@@ -29,14 +32,17 @@ document.addEventListener('DOMContentLoaded', () => {
         tasksList.appendChild(li);
     }
 
+    // Function to start a task
     window.startTask = async function (taskId) {
         await fetch(`/tasks/${taskId}/start`, { method: 'POST' });
     }
 
+    // Function to stop a task
     window.stopTask = async function (taskId) {
         await fetch(`/tasks/${taskId}/stop`, { method: 'POST' });
     }
 
+    // Function to get a task summary
     window.getTaskSummary = async function (taskId) {
         const response = await fetch(`/tasks/${taskId}/summary`);
         const summary = await response.json();
