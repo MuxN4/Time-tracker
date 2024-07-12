@@ -2,6 +2,7 @@
 
 A simple time tracking tool for tracking tasks and summarizing time spent on each activity. Built with Python (Flask) for the backend and HTML/CSS/JavaScript for the frontend, it includes AI-powered task categorization for enhanced productivity.
 
+
 ## Features
 
 - **Time Tracking**: Start and stop tracking time for a task.
