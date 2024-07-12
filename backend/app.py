@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 from models import db, Task
 from utils import categorize_task
 from datetime import datetime
@@ -7,14 +8,23 @@ from datetime import datetime
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tasks.db'
 db.init_app(app)
+CORS(app)  # Add CORS support
 
 @app.before_first_request
 def create_tables():
     db.create_all()
 
+@app.route('/tasks', methods=['GET'])
+def get_tasks():
+    tasks = Task.query.all()
+    tasks_list = [{'id': task.id, 'description': task.description, 'category': task.category} for task in tasks]
+    return jsonify(tasks_list), 200
+
 @app.route('/tasks', methods=['POST'])
 def create_task():
     description = request.json.get('description')
+    if not description:
+        return jsonify({'error': 'Description is required'}), 400
     task = Task(description=description)
     task.category = categorize_task(description)
     db.session.add(task)
