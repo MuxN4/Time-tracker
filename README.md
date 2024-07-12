@@ -30,19 +30,18 @@ A simple time tracking tool for tracking tasks and summarizing time spent on eac
     python backend/app.py
     ```
 
-Warning: If you encounter an sqlite3 module error, install the SQLite development libraries and recreate your virtual environment:
+**Warning**: If you encounter an sqlite3 module error, install the SQLite development libraries and recreate your virtual environment:
 
     ```bash
     sudo apt-get update
-sudo apt-get install libsqlite3-dev
+    sudo apt-get install libsqlite3-dev
 
 # Recreate the virtual environment
-deactivate
-rm -rf venv
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-    ``` 
+    deactivate
+    rm -rf venv
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt 
 
 ### Frontend
 
