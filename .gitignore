@@ -10,8 +10,5 @@ instance/
 venv/
 .env
 
-# Node
-node_modules/
-
 # Other
 .DS_Store
