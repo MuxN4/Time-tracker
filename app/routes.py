@@ -1,11 +1,19 @@
 from flask import render_template, request, redirect, url_for
 from app import app, db
 from app.models import Task, TimeEntry
-from datetime import datetime
+from datetime import datetime, timedelta
 
 @app.route('/')
 def home():
     tasks = Task.query.all()
+    for task in tasks:
+        total_time = timedelta()
+        for entry in task.time_entries:
+            if entry.end_time:
+                total_time += entry.end_time - entry.start_time
+            else:
+                total_time += datetime.utcnow() - entry.start_time
+        task.total_time = total_time
     return render_template('home.html', tasks=tasks)
 
 @app.route('/add_task', methods=['GET','POST'])
